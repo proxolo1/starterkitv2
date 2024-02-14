@@ -1,9 +1,12 @@
 package com.swift.order.application;
 
+import lombok.Builder;
 import lombok.Data;
 
-@Data
-public class Response {
-    private long id;
-    private String message;
+@Builder
+public record Response (
+    long id,
+    String message
+)
+{
 }

@@ -1,6 +1,7 @@
 package com.swift.order.infrastructure;
 
-import com.swift.order.domain.dto.Order;
+import com.swift.order.domain.dto.OrdersDto;
+import com.swift.order.infrastructure.entity.Order;
 import com.swift.order.infrastructure.repositories.OrderItemJpaRepository;
 import com.swift.order.domain.repository.OrderRepository;
 import com.swift.order.infrastructure.repositories.GuestRepository;
@@ -20,8 +21,8 @@ class OrderRepositoryImpl implements OrderRepository {
     @Autowired
     private OrderItemJpaRepository orderItemRepository;
     @Override
-    public Order save(Order order) {
-        return this.orderJpaRepository.save(order);
+    public OrdersDto save(OrdersDto order) {
+        return orderToDTO(this.orderJpaRepository.save(order.mapper()));
     }
 
     @Override
@@ -31,12 +32,14 @@ class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public Order findOrderById(long id) {
-        return orderJpaRepository.findById(id).orElseThrow();
+        return orderJpaRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Order id " + id + " not found"));
     }
 
     @Override
     public Boolean deleteOrder(long id) {
-        return false;
+        Order order = orderJpaRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Order id "+ id + " not found"));
+        orderJpaRepository.delete(order);
+        return true;
     }
 
     @Override
@@ -54,5 +57,17 @@ class OrderRepositoryImpl implements OrderRepository {
     public boolean deleteItems(Integer id) {
         orderItemRepository.deleteById(id);
         return true;
+    }
+    public OrdersDto orderToDTO(Order order) {
+        return new OrdersDto(
+                order.getId(),
+                order.getServer(),
+                order.getDateTime(),
+                order.getTableNumber(),
+                order.getSeats(),
+                order.getCheckNumber(),
+                order.getItems(),
+                order.getGuests()
+        );
     }
 }

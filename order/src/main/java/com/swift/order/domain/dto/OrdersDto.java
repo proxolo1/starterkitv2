@@ -1,5 +1,8 @@
 package com.swift.order.domain.dto;
 
+import com.swift.order.infrastructure.entity.Guests;
+import com.swift.order.infrastructure.entity.Order;
+import com.swift.order.infrastructure.entity.OrderItem;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -8,7 +11,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public record OrdersDto (
@@ -40,7 +42,7 @@ public record OrdersDto (
     @JoinColumn(name = "order_id")
      List<Guests> guests
 ){
-    public Order mapper() {
+    public Order mapper () {
         Order order = new Order();
         order.setTableNumber(this.tableNumber);
         order.setSeats(this.seats);
