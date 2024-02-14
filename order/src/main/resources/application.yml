@@ -1,15 +1,27 @@
+#
+#server:
+#  port: 8091
+#
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/starterkit
+#    username: root
+#    password: root
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      dialect: org.hibernate.dialect.MySQL5Dialect
+#      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
 
 server:
   port: 8091
 
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/starterkit
-    username: root
-    password: root
-    driverClassName: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.MySQL5Dialect
-      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  data:
+    mongodb:
+      uri: mongodb+srv://<username>:<password>@<cluster>/<database>?retryWrites=true&w=majority
+      database: <database>
+
+# Example URI:
+# mongodb+srv://myuser:mypassword@cluster0.abcdef.mongodb.net/mydatabase?retryWrites=true&w=majority

@@ -1,5 +1,12 @@
 
-D
-java:S1948"'Make "items" transient or serializable.(è¯ÂÆ8°Û•Ø1
-E
-java:S1948"(Make "guests" transient or serializable.(Á½æ¹8°Û•Ø1
+X
+java:S1128"6Remove this unused import 'lombok.AllArgsConstructor'.(´œ¾öùÿÿÿÿ8÷±¹Ú1
+H
+java:S1128"+Remove this unused import 'lombok.Builder'.(§’Ğß8÷±¹Ú1
+J
+java:S1128"(Remove this unused import 'lombok.Data'.(÷í«ÿÿÿÿÿ8Ÿ÷±¹Ú1
+R
+java:S1128"5Remove this unused import 'lombok.NoArgsConstructor'.(¸¨›8Ÿ÷±¹Ú1
+S
+java:S1128
+"1Remove this unused import 'java.io.Serializable'.(èãîÂÿÿÿÿÿ8Ÿ÷±¹Ú1

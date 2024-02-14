@@ -1,24 +1,24 @@
 package com.swift.order.infrastructure;
+
 import com.swift.order.domain.dto.Order;
-import com.swift.order.domain.repository.GuestRepository;
-import com.swift.order.domain.repository.OrderItemRepository;
+import com.swift.order.infrastructure.repositories.OrderItemJpaRepository;
 import com.swift.order.domain.repository.OrderRepository;
+import com.swift.order.infrastructure.repositories.GuestRepository;
 import com.swift.order.infrastructure.repositories.OrderJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class OrderRepositoryImpl implements OrderRepository {
-    private final OrderJpaRepository orderJpaRepository;
-    private final GuestRepository guestRepository;
-    private final OrderItemRepository orderItemRepository;
+class OrderRepositoryImpl implements OrderRepository {
     @Autowired
-    OrderRepositoryImpl(OrderJpaRepository repo, GuestRepository guestRepository, OrderItemRepository orderItemRepository) {
-        this.orderJpaRepository = repo;
-        this.guestRepository = guestRepository;
-        this.orderItemRepository = orderItemRepository;
-    }
+    private GuestRepository guestRepository;
+    @Autowired
+    private OrderJpaRepository orderJpaRepository;
+
+    @Autowired
+    private OrderItemJpaRepository orderItemRepository;
     @Override
     public Order save(Order order) {
         return this.orderJpaRepository.save(order);
@@ -42,5 +42,17 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Boolean updateServerName(Order order, Long id) {
         return null;
+    }
+
+    @Override
+    public Boolean deleteGuests(Integer id) {
+        guestRepository.deleteById(id);
+        return true;
+    }
+
+    @Override
+    public boolean deleteItems(Integer id) {
+        orderItemRepository.deleteById(id);
+        return true;
     }
 }

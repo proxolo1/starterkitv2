@@ -10,6 +10,7 @@ public interface OrderRepository {
     Order findOrderById(long id);
     Boolean deleteOrder(long id);
     Boolean updateServerName(Order order, Long id);
+    Boolean deleteGuests(Integer id);
 
-
+    boolean deleteItems(Integer id);
 }

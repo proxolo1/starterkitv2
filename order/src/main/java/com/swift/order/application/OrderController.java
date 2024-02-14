@@ -1,6 +1,7 @@
 package com.swift.order.application;
 
 import com.swift.order.domain.dto.Order;
+import com.swift.order.domain.dto.OrdersDto;
 import com.swift.order.domain.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,11 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
     @PostMapping
-    private ResponseEntity <Order> save(@RequestBody Order order) {
-        return ResponseEntity.ok(orderService.saveOrder(order));
+    private ResponseEntity <Order> save(@RequestBody OrdersDto order) {
+        return ResponseEntity.ok(orderService.saveOrder(order.mapper()));
+    }
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Boolean> deleteOrder(@PathVariable Integer id) {
+        return ResponseEntity.ok(orderService.deleteOrder(id));
     }
 }
